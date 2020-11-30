@@ -50,7 +50,9 @@ export default function ResultCard(props) {
               <a href={props.link}>
                 <Button color="primary">View</Button>
               </a>
-              <Button color="primary">Save</Button>
+              <Button onClick={() => props.saveFn(props.id)} color="primary">
+                Save
+              </Button>
             </Typography>
           </Grid>
         </Grid>

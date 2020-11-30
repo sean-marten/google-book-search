@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import ResultPage from "./ResultPage";
@@ -37,6 +37,29 @@ export default function SearchPage() {
     });
   };
 
+  const handleSave = (id) => {
+    const book = results[id];
+    const {
+      authors,
+      title,
+      description,
+      imageLinks,
+      infoLink,
+    } = book.volumeInfo;
+    const tempResults = results;
+    tempResults.splice(id, 1);
+    setResults([...tempResults]);
+    API.addBook(
+      authors[0],
+      title,
+      description,
+      imageLinks.smallThumbnail,
+      infoLink
+    ).then((res) => {
+      console.log(res);
+    });
+  };
+
   return (
     <Container>
       <Container className={classes.root}>
@@ -60,7 +83,7 @@ export default function SearchPage() {
           </Typography>
         </form>
       </Container>
-      <ResultPage data={results} />
+      <ResultPage data={results} saveFn={handleSave} />
     </Container>
   );
 }

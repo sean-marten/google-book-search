@@ -23,14 +23,16 @@ export default function ResultPage(props) {
       <Typography variant="h5" gutterBottom>
         Results
       </Typography>
-      {props.data.map((book) => (
+      {props.data.map((book, index) => (
         <ResultCard
-          key={book.volumeInfo.title}
+          key={index}
+          id={index}
           author={book.volumeInfo.authors[0]}
           title={book.volumeInfo.title}
           description={book.volumeInfo.description}
           image={book.volumeInfo.imageLinks.smallThumbnail}
           link={book.volumeInfo.infoLink}
+          saveFn={props.saveFn}
         />
       ))}
     </Container>

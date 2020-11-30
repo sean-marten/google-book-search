@@ -1,6 +1,14 @@
 const db = require("../model");
 
 module.exports = {
+  getAllBooks: async (_req, res) => {
+    try {
+      const books = await db.Book.find();
+      return res.json(books).status(200);
+    } catch (e) {
+      return res.status(400).json(e);
+    }
+  },
   addBook: async (req, res) => {
     const { author, title, description, image, link } = req.body;
     try {

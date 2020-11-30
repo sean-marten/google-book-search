@@ -6,6 +6,9 @@ export default {
       `https://www.googleapis.com/books/v1/volumes?q=${search}&maxResults=${limit}`
     );
   },
+  getAllBooks: function () {
+    return axios.get("/api/books");
+  },
   addBook: function (author, title, description, image, link) {
     return axios.post("/api/books", {
       author,
@@ -14,5 +17,8 @@ export default {
       image,
       link,
     });
+  },
+  deleteBook: function (id) {
+    return axios.delete(`/api/books/${id}`);
   },
 };

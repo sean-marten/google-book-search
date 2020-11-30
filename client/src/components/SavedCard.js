@@ -12,25 +12,22 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
   },
-  image: {
-    width: 128,
-    height: 128,
-  },
 }));
 
-export default function SavedCard() {
+export default function SavedCard(props) {
   const classes = useStyles();
+  console.log(props);
 
   return (
     <Paper className={classes.paper}>
       <Grid container spacing={2}>
         <Grid item>
-          <Typography>Title</Typography>
+          <Typography>{props.book.title}</Typography>
           <Typography variant="body2" gutterBottom>
-            written by Author
+            written by {props.book.author}
           </Typography>
-          <div className={classes.image}>
-            <img alt="Title" />
+          <div>
+            <img alt={props.book.title} src={props.book.image} />
           </div>
         </Grid>
         <Grid item sm container>
@@ -41,14 +38,21 @@ export default function SavedCard() {
                 variant="body2"
                 color="textSecondary"
               >
-                Description
+                {props.book.description}
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1">
-              <Button color="primary">View</Button>
-              <Button color="primary">Delete</Button>
+              <a href={props.book.link}>
+                <Button color="primary">View</Button>
+              </a>
+              <Button
+                onClick={() => props.deleteFn(props.book._id)}
+                color="primary"
+              >
+                Delete
+              </Button>
             </Typography>
           </Grid>
         </Grid>
