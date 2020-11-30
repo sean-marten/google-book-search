@@ -18,19 +18,19 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ResultCard() {
+export default function ResultCard(props) {
   const classes = useStyles();
 
   return (
     <Paper className={classes.paper}>
       <Grid container spacing={2}>
         <Grid item>
-          <Typography>Title</Typography>
+          <Typography>{props.title}</Typography>
           <Typography variant="body2" gutterBottom>
-            written by Author
+            written by {props.author}
           </Typography>
-          <div className={classes.image}>
-            <img alt="Title" />
+          <div>
+            <img alt={props.title} src={props.image} />
           </div>
         </Grid>
         <Grid item sm container>
@@ -41,13 +41,15 @@ export default function ResultCard() {
                 variant="body2"
                 color="textSecondary"
               >
-                Description
+                {props.description}
               </Typography>
             </Grid>
           </Grid>
           <Grid item>
             <Typography variant="subtitle1">
-              <Button color="primary">View</Button>
+              <a href={props.link}>
+                <Button color="primary">View</Button>
+              </a>
               <Button color="primary">Save</Button>
             </Typography>
           </Grid>

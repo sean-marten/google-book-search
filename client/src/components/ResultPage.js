@@ -13,15 +13,26 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ResultPage() {
+export default function ResultPage(props) {
   const classes = useStyles();
+
+  console.log(props.data);
 
   return (
     <Container className={classes.root}>
       <Typography variant="h5" gutterBottom>
         Results
       </Typography>
-      <ResultCard />
+      {props.data.map((book) => (
+        <ResultCard
+          key={book.volumeInfo.title}
+          author={book.volumeInfo.authors[0]}
+          title={book.volumeInfo.title}
+          description={book.volumeInfo.description}
+          image={book.volumeInfo.imageLinks.smallThumbnail}
+          link={book.volumeInfo.infoLink}
+        />
+      ))}
     </Container>
   );
 }

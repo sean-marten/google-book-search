@@ -1,11 +1,11 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
 import ResultPage from "./ResultPage";
 import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
-import Grid from "@material-ui/core/Grid";
 import Button from "@material-ui/core/Button";
+import API from "../utils/api";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -15,6 +15,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(2),
     marginBottom: theme.spacing(2),
     padding: theme.spacing(2),
+    textAlign: "center",
   },
   input: {
     backgroundColor: theme.palette.common.white,
@@ -26,6 +27,15 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SearchPage() {
   const classes = useStyles();
+  const [search, setSearch] = useState("");
+  const [results, setResults] = useState([]);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    API.search(search, 10).then((res) => {
+      setResults(res.data.items);
+    });
+  };
 
   return (
     <Container>
@@ -34,21 +44,23 @@ export default function SearchPage() {
           Book Search
         </Typography>
         <br />
-        <form noValidate autoComplete="off">
+        <form noValidate autoComplete="off" onSubmit={handleSubmit}>
           <TextField
             id="outlined-basic"
             label="Book"
             variant="outlined"
             className={classes.input}
+            onChange={(e) => setSearch(e.target.value)}
           />
+          <Typography style={{ textAlign: "right" }}>
+            <br />
+            <Button type="submit" className={classes.button}>
+              Search
+            </Button>
+          </Typography>
         </form>
-        <br />
-        <Typography>
-          <Button className={classes.button}>Search</Button>
-        </Typography>
       </Container>
-
-      <ResultPage />
+      <ResultPage data={results} />
     </Container>
   );
 }
