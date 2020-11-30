@@ -16,8 +16,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ResultPage(props) {
   const classes = useStyles();
 
-  console.log(props.data);
-
   return (
     <Container className={classes.root}>
       <Typography variant="h5" gutterBottom>

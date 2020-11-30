@@ -16,7 +16,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SavedCard(props) {
   const classes = useStyles();
-  console.log(props);
 
   return (
     <Paper className={classes.paper}>

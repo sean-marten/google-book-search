@@ -55,9 +55,7 @@ export default function SearchPage() {
       description,
       imageLinks.smallThumbnail,
       infoLink
-    ).then((res) => {
-      console.log(res);
-    });
+    );
   };
 
   return (

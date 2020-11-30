@@ -31,8 +31,6 @@ export default function SearchPage() {
     API.deleteBook(id).then((res) => setDeletedBookId(res.data._id));
   };
 
-  console.log(savedBooks);
-
   return savedBooks ? (
     <Container className={classes.top}>
       <Container className={classes.root}>
